@@ -1,0 +1,20 @@
+FROM node:alpine as builder
+
+ARG node_env=production
+ARG asset_template=%s
+ARG data_endpoint=/sbf-data
+
+ENV NODE_ENV=$node_env
+ENV ASSET_TEMPLATE=$asset_template
+ENV DATA_ENDPOINT=$data_endpoint
+
+RUN mkdir /app
+
+COPY . /app
+WORKDIR /app
+RUN yarn install --pure-lockfile
+RUN yarn build
+
+FROM nginx:alpine
+COPY --from=builder /app/public /usr/share/nginx/html/
+EXPOSE 80

@@ -1,0 +1,416 @@
+{
+  "annotations": {
+    "entities": {
+      "annotations": {
+        "ids": [],
+        "byId": {}
+      },
+      "streamPoints": {
+        "ids": [],
+        "byId": {}
+      },
+      "annotationsViewers": {
+        "ids": [
+          "3965558c7438a3ferew2a8a8f05de8813",
+          "3965558c7438a3ferew2a8a8f05de8814",
+          "3965558c7438a3ferew2a8a8f05de8815",
+          "3965558c7438a3ferew2a8a8f05de8816",
+          "3965558c7438a3ferew2a8a8f05de8817",
+          "3965558c7438a3ferew2a8a8f05de8818"
+        ],
+        "byId": {
+          "3965558c7438a3ferew2a8a8f05de8813": {
+            "id": "3965558c7438a3ferew2a8a8f05de8813",
+            "active": true,
+            "editable": false,
+            "annotations": [],
+            "inTextEditMode": false
+          },
+          "3965558c7438a3ferew2a8a8f05de8814": {
+            "id": "3965558c7438a3ferew2a8a8f05de8814",
+            "active": true,
+            "editable": false,
+            "annotations": [],
+            "inTextEditMode": false
+          },
+          "3965558c7438a3ferew2a8a8f05de8815": {
+            "id": "3965558c7438a3ferew2a8a8f05de8815",
+            "active": true,
+            "editable": false,
+            "annotations": [],
+            "inTextEditMode": false
+          },
+          "3965558c7438a3ferew2a8a8f05de8816": {
+            "id": "3965558c7438a3ferew2a8a8f05de8816",
+            "active": true,
+            "editable": false,
+            "annotations": [],
+            "inTextEditMode": false
+          },
+          "3965558c7438a3ferew2a8a8f05de8817": {
+            "id": "3965558c7438a3ferew2a8a8f05de8817",
+            "active": true,
+            "editable": false,
+            "annotations": [],
+            "inTextEditMode": false
+          },
+          "3965558c7438a3ferew2a8a8f05de8818": {
+            "id": "3965558c7438a3ferew2a8a8f05de8818",
+            "active": true,
+            "editable": false,
+            "annotations": [],
+            "inTextEditMode": false
+          }
+        }
+      }
+    },
+    "editorOpen": false,
+    "streamPointSelectorOpen": false
+  },
+  "assets": {
+    "entities": {
+      "assets": {
+        "ids": [
+          "Rc01",
+          "Rc02",
+          "Rc03",
+          "HS_1",
+          "HS_2",
+          "HS_3"
+        ],
+        "byId": {
+          "Rc01": {
+            "id": "Rc01",
+            "resource": "video:Rc01",
+            "annotationsViewerId": "3965558c7438a3ferew2a8a8f05de8813"
+          },
+          "Rc02": {
+            "id": "Rc02",
+            "resource": "video:Rc02",
+            "annotationsViewerId": "3965558c7438a3ferew2a8a8f05de8814"
+          },
+          "Rc03": {
+            "id": "Rc03",
+            "resource": "video:Rc03",
+            "annotationsViewerId": "3965558c7438a3ferew2a8a8f05de8815"
+          },
+          "HS_1": {
+            "id": "HS_1",
+            "resource": "high-speed:rc1",
+            "annotationsViewerId": "3965558c7438a3ferew2a8a8f05de8816"
+          },
+          "HS_2": {
+            "id": "HS_2",
+            "resource": "high-speed:rc2",
+            "annotationsViewerId": "3965558c7438a3ferew2a8a8f05de8817"
+          },
+          "HS_3": {
+            "id": "HS_3",
+            "resource": "high-speed:rc3",
+            "annotationsViewerId": "3965558c7438a3ferew2a8a8f05de8818"
+          }
+        }
+      }
+    },
+    "showInfo": []
+  },
+  "data": {
+    "entities": {
+      "dataViewers": {
+        "ids": [
+          "1"
+        ],
+        "byId": {
+          "1": {
+            "id": "1",
+            "configVisible": true,
+            "configAvailable": true,
+            "outletId": "dataviewer/1",
+            "registered": true,
+            "yAxisMin": null,
+            "yAxisMax": null,
+            "yAxisNewMin": null,
+            "yAxisNewMax": null,
+            "yAxisMinError": null,
+            "yAxisMaxError": null
+          }
+        }
+      },
+      "dataViewerLegends": {
+        "ids": [],
+        "byId": {}
+      },
+      "outlets": {
+        "ids": [
+          "dataviewer/1",
+          "annotations"
+        ],
+        "byId": {
+          "dataviewer/1": {
+            "id": "dataviewer/1",
+            "streams": [],
+            "loading": false,
+            "resolution": 6000,
+            "visible": 63927.70058112377
+          },
+          "annotations": {
+            "id": "annotations",
+            "streams": [],
+            "loading": false,
+            "resolution": 6000,
+            "visible": 10000
+          }
+        }
+      }
+    },
+    "dataChooserOpen": false,
+    "dataChooserTargetViewerId": null,
+    "dataURL": "/sbf-data"
+  },
+  "timer": {
+    "running": false,
+    "startTime": null,
+    "waiting": false,
+    "waitingReasons": [],
+    "range": [],
+    "rate": 1
+  },
+  "layout": {
+    "entities": {
+      "layoutSections": {
+        "ids": [
+          "data",
+          "855fbcd291fdcc805f8a545c23ae1a04",
+          "d44a598f78c1ab8967dd1fbf2d994104",
+          "top",
+          "high-speeds",
+          "videos",
+          "71b9665df3d7191dd8356e3c3df9c8f5",
+          "5a3d0252c6d6ee935618e84dc4d08362",
+          "b919b1b9cee1999196de4a8469147429"
+        ],
+        "byId": {
+          "data": {
+            "reorderEnabled": true,
+            "componentName": "lm-react-component",
+            "props": {
+              "title": "DataViewer",
+              "dataViewerId": "1"
+            },
+            "isClosable": true,
+            "componentState": {
+              "width": 1440,
+              "height": 386
+            },
+            "title": "DataViewer",
+            "type": "component",
+            "id": "data",
+            "component": "DataViewerComponent"
+          },
+          "855fbcd291fdcc805f8a545c23ae1a04": {
+            "reorderEnabled": true,
+            "componentName": "lm-react-component",
+            "props": {
+              "title": "Video - Rc02",
+              "assetId": "Rc02"
+            },
+            "isClosable": true,
+            "componentState": {
+              "width": 738,
+              "height": 386
+            },
+            "title": "lm-react-component",
+            "type": "component",
+            "id": "855fbcd291fdcc805f8a545c23ae1a04",
+            "component": "VideoComponent"
+          },
+          "d44a598f78c1ab8967dd1fbf2d994104": {
+            "reorderEnabled": true,
+            "height": 50,
+            "header": {},
+            "isClosable": true,
+            "title": "",
+            "content": [
+              "data"
+            ],
+            "activeItemIndex": 0,
+            "type": "stack",
+            "id": "d44a598f78c1ab8967dd1fbf2d994104"
+          },
+          "top": {
+            "id": "top",
+            "type": "row",
+            "title": "Top",
+            "isClosable": true,
+            "reorderEnabled": true,
+            "height": 50,
+            "content": [
+              "videos",
+              "high-speeds"
+            ]
+          },
+          "high-speeds": {
+            "id": "high-speeds",
+            "type": "stack",
+            "title": "High-Speeds",
+            "isClosable": true,
+            "reorderEnabled": true,
+            "width": 48.60976942814486,
+            "activeItemIndex": 0,
+            "content": [
+              "5a3d0252c6d6ee935618e84dc4d08362",
+              "5a3d0252c6d6ee935618e84dc4d08363",
+              "5a3d0252c6d6ee935618e84dc4d08364"
+            ]
+          },
+          "videos": {
+            "width": 51.39023057185513,
+            "reorderEnabled": true,
+            "height": 100,
+            "isClosable": true,
+            "title": "Videos",
+            "content": [
+              "b919b1b9cee1999196de4a8469147429",
+              "855fbcd291fdcc805f8a545c23ae1a04",
+              "b919b1b9cee1999196de4a8469147430"
+            ],
+            "activeItemIndex": 0,
+            "type": "stack",
+            "id": "videos"
+          },
+          "71b9665df3d7191dd8356e3c3df9c8f5": {
+            "type": "column",
+            "isClosable": true,
+            "reorderEnabled": true,
+            "title": "",
+            "id": "71b9665df3d7191dd8356e3c3df9c8f5",
+            "content": [
+              "top",
+              "d44a598f78c1ab8967dd1fbf2d994104"
+            ]
+          },
+          "5a3d0252c6d6ee935618e84dc4d08362": {
+            "reorderEnabled": true,
+            "componentName": "lm-react-component",
+            "props": {
+              "title": "HS_1",
+              "assetId": "HS_1"
+            },
+            "isClosable": true,
+            "componentState": {
+              "width": 697,
+              "height": 386
+            },
+            "title": "lm-react-component",
+            "type": "component",
+            "id": "5a3d0252c6d6ee935618e84dc4d08362",
+            "component": "PlaylistComponent"
+          },
+          "5a3d0252c6d6ee935618e84dc4d08363": {
+            "reorderEnabled": true,
+            "componentName": "lm-react-component",
+            "props": {
+              "title": "HS_2",
+              "assetId": "HS_2"
+            },
+            "isClosable": true,
+            "componentState": {
+              "width": 697,
+              "height": 386
+            },
+            "title": "lm-react-component",
+            "type": "component",
+            "id": "5a3d0252c6d6ee935618e84dc4d08363",
+            "component": "PlaylistComponent"
+          },
+          "5a3d0252c6d6ee935618e84dc4d08364": {
+            "reorderEnabled": true,
+            "componentName": "lm-react-component",
+            "props": {
+              "title": "HS_3",
+              "assetId": "HS_3"
+            },
+            "isClosable": true,
+            "componentState": {
+              "width": 697,
+              "height": 386
+            },
+            "title": "lm-react-component",
+            "type": "component",
+            "id": "5a3d0252c6d6ee935618e84dc4d08364",
+            "component": "PlaylistComponent"
+          },
+          "b919b1b9cee1999196de4a8469147429": {
+            "reorderEnabled": true,
+            "componentName": "lm-react-component",
+            "props": {
+              "title": "Video - Rc01",
+              "assetId": "Rc01"
+            },
+            "isClosable": true,
+            "componentState": {
+              "width": 738,
+              "height": 386
+            },
+            "title": "lm-react-component",
+            "type": "component",
+            "id": "b919b1b9cee1999196de4a8469147429",
+            "component": "VideoComponent"
+          },
+          "b919b1b9cee1999196de4a8469147430": {
+            "reorderEnabled": true,
+            "componentName": "lm-react-component",
+            "props": {
+              "title": "Video - Rc03",
+              "assetId": "Rc03"
+            },
+            "isClosable": true,
+            "componentState": {
+              "width": 738,
+              "height": 386
+            },
+            "title": "lm-react-component",
+            "type": "component",
+            "id": "b919b1b9cee1999196de4a8469147430",
+            "component": "VideoComponent"
+          }
+        }
+      }
+    },
+    "focus": "b919b1b9cee1999196de4a8469147429",
+    "content": [
+      "71b9665df3d7191dd8356e3c3df9c8f5"
+    ],
+    "didInvalidate": true
+  },
+  "timeline": {
+    "entities": {
+      "axes": {
+        "ids": [
+          "video",
+          "high-speed"
+        ],
+        "byId": {
+          "video": {
+            "id": "video",
+            "color": "#41b51b",
+            "resources": [
+              "video:Rc01",
+              "video:Rc02",
+              "video:Rc03"
+            ]
+          },
+          "high-speed": {
+            "id": "high-speed",
+            "color": "#3318cc",
+            "resources": [
+              "high-speed:rc1",
+              "high-speed:rc2",
+              "high-speed:rc3"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

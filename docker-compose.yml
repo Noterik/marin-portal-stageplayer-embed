@@ -1,0 +1,25 @@
+version: '2'
+services:
+  embed:
+    restart: always
+    build: 
+      context: ./app
+    env_file:
+      - .env
+    links:
+      - dataserver
+      - stageplayer
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+      - ${HOST_ASSET_ROOT}:/export
+    ports: 
+      - '80:80'
+  dataserver:
+    restart: always
+    image: index.docker.io/noterik/stageplayer-sbf-reader:latest
+    volumes:
+      - ${HOST_ASSET_ROOT}:/export
+      - ./config:/opt/noterik
+  stageplayer:
+    restart: always
+    image: index.docker.io/noterik/marin-stageplayer:latest

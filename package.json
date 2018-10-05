@@ -1,0 +1,5 @@
+{
+  "devDependencies": {
+    "env-cmd": "^8.0.2"
+  }
+}
