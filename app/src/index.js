@@ -47,8 +47,12 @@ function initStagePlayer() {
     })
     .then((stageWithoutSettings) => {
       const stage = {
-        ...stageWithoutSettings,
         ...settings,
+        ...stageWithoutSettings,
+        data: {
+          ...settings.data,
+          ...stageWithoutSettings.data,
+        },
       };
 
       const args = {
