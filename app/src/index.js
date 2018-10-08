@@ -4,7 +4,7 @@ require('isomorphic-fetch');
 const path = require('path');
 const querystring = require('querystring');
 const { sprintf } = require('sprintf-js');
-//const settings = require('./stagesettings.json');
+const settings = require('./stagesettings.json');
 
 const paramsStr = window.location.search.indexOf('?') === 0 ? window.location.search.substring(1) : window.location.search;
 const params = querystring.parse(paramsStr);
@@ -45,36 +45,12 @@ function initStagePlayer() {
         return response.json();
       }
     })
-    /*
-    .then((stage) => {
-      console.log('received stage = ', stage);
-      return {
+    .then((stageWithoutSettings) => {
+      const stage = {
+        ...stageWithoutSettings,
         ...settings,
-        ...stage,
-        files: {
-          ...stage.files,
-          entities: {
-            ...stage.files.entities,
-            files: {
-              ...stage.files.entities.files,
-              byId: stage.files.entities.files.ids.reduce((acc, id) => {
-                const file = stage.files.entities.files.byId[id];
-
-                return {
-                  ...acc,
-                  [id]: {
-                    ...file,
-                    path: path.resolve(parent, file.path),
-                  },
-                };
-              }, {}),
-            },
-          },
-        },
       };
-    })
-    */
-    .then((stage) => {
+
       const args = {
         ...defaultArgs,
         stageRoot: parent,
