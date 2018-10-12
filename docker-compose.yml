@@ -17,7 +17,6 @@ services:
     image: index.docker.io/noterik/stageplayer-sbf-reader:latest
     volumes:
       - ${HOST_ASSET_ROOT}:/export
-      - ./config:/opt/noterik
   stageplayer:
     restart: always
     image: index.docker.io/noterik/marin-stageplayer:latest
