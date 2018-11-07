@@ -49,6 +49,9 @@ function initStagePlayer() {
       const stage = {
         ...settings,
         ...stageWithoutSettings,
+        menu: {
+          visible: false,
+        },
         data: {
           ...settings.data,
           ...stageWithoutSettings.data,
