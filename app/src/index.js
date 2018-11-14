@@ -52,6 +52,10 @@ function initStagePlayer() {
         menu: {
           visible: false,
         },
+        annotations: {
+          ...settings.annotations,
+          allowed: false,
+        },
         data: {
           ...settings.data,
           ...stageWithoutSettings.data,
