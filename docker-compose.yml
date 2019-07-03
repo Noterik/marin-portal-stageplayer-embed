@@ -1,22 +1,5 @@
 version: '2'
 services:
-  embed_prod:
-    restart: always
-    build:
-      context: ./
-      dockerfile: Dockerfile
-    env_file:
-      - .env
-    volumes:
-      - /app/node_modules
-    command: ['--host=0.0.0.0', '--port=3000', '--assetRoot=/export', '--logLevel=debug']
-  proxy:
-    image: nginx:latest
-    ports:
-      - '80:80'
-    volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf
-      - ${HOST_ASSET_ROOT}:/export
   dataserver:
     restart: always
     image: index.docker.io/noterik/stageplayer-sbf-reader:latest
@@ -31,3 +14,29 @@ services:
   stageplayer:
     restart: always
     image: index.docker.io/noterik/marin-stageplayer:2.1.1-SNAPSHOT
+    ports:
+      - '2345:80'
+  embed_prod:
+    restart: always
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    ports:
+      - "${HOST_PORT}:8080"
+    env_file:
+      - .env
+    environment:
+      - NODE_ENV=production
+    volumes:
+      - ${HOST_ASSET_ROOT}:/static
+      - /app/node_modules
+      - ./server:/app/server
+    command: [
+      '--host=0.0.0.0',
+      '--port=8080',
+      '--assetRoot=/static',
+      '--dataServer=http://measurementserver:8080',
+      '--sbfDataServer=http://dataserver:8080',
+      '--stageplayerServer=http://stageplayer',
+      '--logLevel=debug'
+    ]

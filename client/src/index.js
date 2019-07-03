@@ -1,13 +1,12 @@
 const querystring = require('querystring');
 const marin = require('marin');
-const settings = require('./settings');
+const constants = require('../../constants');
 
 const {
   STAGE_ENDPOINT,
   DATA_ENDPOINT,
   SBF_DATA_ENDPOINT,
-  ASSET_TEMPLATE,
-} = settings;
+} = constants;
 
 const paramsStr = window.location.search.indexOf('?') === 0
   ? window.location.search.substring(1)
@@ -38,7 +37,6 @@ const defaultArgs = {
   target: '#root',
   dataEndpoint: DATA_ENDPOINT,
   sbfDataEndpoint: SBF_DATA_ENDPOINT,
-  fileURLTemplate: ASSET_TEMPLATE,
   outgoingActions,
   stage,
 };

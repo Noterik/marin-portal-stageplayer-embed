@@ -14,7 +14,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://fonts.googleapis.com/css?family=Arvo:400,700)" rel="stylesheet">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
-  <link rel="stylesheet" href="resources/app.css">
+  <link rel="stylesheet" href="<%= process.env.STAGEPLAYER_ENDPOINT %>/app.css">
 </head>
 
 <body>
@@ -25,9 +25,9 @@
   </div>
   <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
   <script type="text/javascript">
-    window.STAGEPLAYER_PUBLIC_PATH = 'resources/';
+    window.STAGEPLAYER_PUBLIC_PATH = '<%= process.env.STAGEPLAYER_ENDPOINT %>/';
   </script>
-  <script src="resources/app.bundle.js" type="text/javascript"></script>
+  <script src="<%= process.env.STAGEPLAYER_ENDPOINT %>/app.bundle.js" type="text/javascript"></script>
 </body>
 
 </html>

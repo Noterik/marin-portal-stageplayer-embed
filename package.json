@@ -1,6 +1,6 @@
 {
   "name": "marin-portal-stageplayer-embed",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Embed for StagePlayer",
   "main": "index.js",
   "repository": "git@github.com:Noterik/marin-portal-stageplayer-embed.git",
@@ -10,7 +10,8 @@
     "start-client": "webpack-dev-server --config=./client/webpack.config.js",
     "start-server": "nodemon --watch server server/index.js",
     "start": "yarn start-client & yarn run start-server",
-    "build": "webpack --config=./client/webpack.config.js"
+    "start-production": "yarn run start-server",
+    "build": "webpack --env.NODE_ENV=production --config=./client/webpack.config.js"
   },
   "devDependencies": {
     "@babel/core": "^7.4.5",
@@ -34,8 +35,9 @@
   "dependencies": {
     "ajv": "^6.10.0",
     "body-parser": "^1.19.0",
-    "date-fns": "^1.30.1",
+    "date-fns": "^2.0.0-alpha.37",
     "express": "^4.17.1",
+    "http-proxy-middleware": "^0.19.1",
     "insync-stage-handler": "^2.1.0",
     "minimist": "^1.2.0",
     "object-hash": "^1.3.1",
