@@ -25,7 +25,7 @@
     "querystring": "^0.2.0",
     "webpack": "^3.1.0",
     "webpack-cli": "^3.1.2",
-    "webpack-dev-server": "^3.1.9",
+    "webpack-dev-server": "^3.1.11",
     "webpack-dotenv-plugin": "^2.1.0"
   },
   "dependencies": {
