@@ -13,7 +13,7 @@ services:
     command: ['-d', '/data', '--logLevel', 'INFO']
   stageplayer:
     restart: always
-    image: index.docker.io/noterik/marin-stageplayer:2.1.1-SNAPSHOT
+    image: index.docker.io/noterik/marin-stageplayer:2.1.1
     ports:
       - '2345:80'
   embed_prod:
