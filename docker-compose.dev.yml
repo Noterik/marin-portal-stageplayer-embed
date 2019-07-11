@@ -16,21 +16,20 @@ services:
     image: index.docker.io/noterik/marin-stageplayer:2.1.1
     ports:
       - '2345:80'
-  embed_prod:
+  embed:
     restart: always
     build:
       context: ./
-      dockerfile: Dockerfile
+      dockerfile: dev.Dockerfile
     ports:
       - "${HOST_PORT}:8080"
     env_file:
       - .env
-    environment:
-      - NODE_ENV=production
     volumes:
       - ${HOST_ASSET_ROOT}:/static
       - /app/node_modules
       - ./server:/app/server
+      - ./client:/app/client
     command: [
       '--host=0.0.0.0',
       '--port=8080',
