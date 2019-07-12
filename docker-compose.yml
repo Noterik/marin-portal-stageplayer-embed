@@ -4,39 +4,35 @@ services:
     restart: always
     image: index.docker.io/noterik/stageplayer-sbf-reader:latest
     volumes:
-      - ${HOST_ASSET_ROOT}:/export
+      - ${HOST_ASSET_ROOT}:${ASSET_ROOT}
   measurementserver:
     restart: always
     image: index.docker.io/noterik/insync-measurement-reader:latest
     volumes:
-      - ${HOST_ASSET_ROOT}:/data
+      - ${HOST_ASSET_ROOT}:/data/${ASSET_ROOT}
     command: ['-d', '/data', '--logLevel', 'INFO']
   stageplayer:
-    restart: always
     image: index.docker.io/noterik/marin-stageplayer:2.1.1
-    ports:
-      - '2345:80'
-  embed_prod:
+  embed:
     restart: always
     build:
       context: ./
       dockerfile: Dockerfile
-    ports:
-      - "${HOST_PORT}:8080"
     env_file:
       - .env
-    environment:
-      - NODE_ENV=production
+    ports:
+      - "${HOST_PORT}:8080"
     volumes:
-      - ${HOST_ASSET_ROOT}:/static
+      - ${HOST_ASSET_ROOT}:${ASSET_ROOT}
       - /app/node_modules
       - ./server:/app/server
+      - ./constants.js:/app/constants.js
     command: [
       '--host=0.0.0.0',
       '--port=8080',
-      '--assetRoot=/static',
+      '--assetRoot=${ASSET_ROOT}',
       '--dataServer=http://measurementserver:8080',
       '--sbfDataServer=http://dataserver:8080',
-      '--stageplayerServer=http://stageplayer',
+      '--libServer=http://stageplayer',
       '--logLevel=debug'
     ]

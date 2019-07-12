@@ -2,7 +2,7 @@ FROM node:12-alpine
 
 WORKDIR /tmp
 COPY package.json yarn.lock /tmp/
-
+RUN ls -lah
 RUN yarn install --ignore-optional --pure-lockfile
 
 WORKDIR /app

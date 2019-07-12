@@ -9,6 +9,7 @@ const devServer =
     ? {
         host: constants.CLIENT_HOST,
         port: constants.CLIENT_PORT,
+        disableHostCheck: true,
         hot: true,
         contentBase: '/static',
         headers: {

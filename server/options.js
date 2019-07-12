@@ -11,6 +11,7 @@ const args = minimist(process.argv.slice(2), {
     dataServer: 'data-server',
     sbfDataServer: 'sbf-data-server',
     stageplayerServer: 'stageplayer-server',
+    libServer: 'lib-server',
   },
 });
 
@@ -22,7 +23,7 @@ const {
   assetRoot = './',
   dataServer = 'http://localhost',
   sbfDataServer = 'http://localhost',
-  stageplayerServer = 'http://localhost',
+  libServer = 'http://localhost',
 } = args;
 
 const root = path.resolve(__dirname, '..');
@@ -35,5 +36,5 @@ module.exports = Object.freeze({
   assetRoot: path.resolve(root, assetRoot),
   dataServer,
   sbfDataServer,
-  stageplayerServer,
+  libServer,
 });

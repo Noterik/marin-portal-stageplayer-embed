@@ -1,0 +1,9 @@
+{
+  "version": "v1",
+  "packages": {
+    "insync-stageplayer": {
+      "signature": "52b5c088808f290d1e7811c4f6142260",
+      "file": true
+    }
+  }
+}

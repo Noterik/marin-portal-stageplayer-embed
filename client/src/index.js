@@ -1,6 +1,6 @@
 const querystring = require('querystring');
-const marin = require('marin');
 const constants = require('../../constants');
+const url = require('url');
 
 const {
   STAGE_ENDPOINT,
@@ -15,8 +15,12 @@ const params = querystring.parse(paramsStr);
 
 const { stage = undefined } = params;
 
+const stageURL = url.resolve(window.location.href, STAGE_ENDPOINT);
+const dataURL = url.resolve(window.location.href, DATA_ENDPOINT);
+const sbfDataURL = url.resolve(window.location.href, SBF_DATA_ENDPOINT);
+
 const outgoingActions = {
-  getStage: async (url) => fetch(`${STAGE_ENDPOINT}?${querystring.stringify({ file: stage })}`).then(r => r.json()),
+  getStage: async () => fetch(`${stageURL}?${querystring.stringify({ file: stage })}`).then(r => r.json()),
   save: () => {
     return Promise.reject();
   },
@@ -32,18 +36,20 @@ const outgoingActions = {
   toggleDevTools: () => {
     return Promise.reject();
   },
-}
+};
+
 const defaultArgs = {
   target: '#root',
-  dataEndpoint: DATA_ENDPOINT,
-  sbfDataEndpoint: SBF_DATA_ENDPOINT,
+  dataEndpoint: dataURL,
+  sbfDataEndpoint: sbfDataURL,
+  fileURITemplate: 'export%s',
   outgoingActions,
   stage,
 };
 
 const initStagePlayer = () => {
   const args = { ...defaultArgs };
-  if(!stage) {
+  if (!stage) {
     args.error = 'No stage specified.';
     marin.StagePlayer(args);
     return;

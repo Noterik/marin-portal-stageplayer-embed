@@ -1,6 +1,5 @@
 const path = require('path');
 const fs = require('fs').promises;
-const { assetRoot } = require('./options');
 const { LOGGER } = require('./logger');
 
 const tap = cb => (a) => {
@@ -26,12 +25,8 @@ const findSettingsFor = (p) => {
     .split(path.sep)
     .slice(0, -1);
 
-  console.log('path parts = ', pathParts);
-  console.log('asset root =', assetRoot);
-
   const paths = pathParts
-    .reduce((acc, curr, i) => [...acc, pathParts.slice(0, i + 1).join(path.sep)], [assetRoot])
-    .map(part => path.resolve(assetRoot, part))
+    .reduce((acc, curr, i) => [...acc, pathParts.slice(0, i + 1).join(path.sep)], [])
     .reverse();
 
   console.log('paths = ', paths);
