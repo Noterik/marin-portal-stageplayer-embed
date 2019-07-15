@@ -1,12 +1,8 @@
 const querystring = require('querystring');
-const constants = require('../../constants');
 const url = require('url');
+const constants = require('../../constants');
 
-const {
-  STAGE_ENDPOINT,
-  DATA_ENDPOINT,
-  SBF_DATA_ENDPOINT,
-} = constants;
+const { STAGE_ENDPOINT, DATA_ENDPOINT, SBF_DATA_ENDPOINT } = constants;
 
 const paramsStr = window.location.search.indexOf('?') === 0
   ? window.location.search.substring(1)
@@ -54,8 +50,7 @@ const initStagePlayer = () => {
     marin.StagePlayer(args);
     return;
   }
-
   marin.StagePlayer(args);
-}
+};
 
 document.addEventListener('DOMContentLoaded', initStagePlayer);

@@ -15,18 +15,28 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get(`/(/)?${constants.STAGE_ENDPOINT}`, (req, res) => {
   LOGGER.info('Request.', req);
-  getStage(req.query.file)
-    .then(stage => res.json(stage));
+  getStage(req.query.file).then(stage => res.json(stage));
 });
 
-app.use('/(/)?lib', express.static(path.resolve(__dirname, '../node_modules/insync-stageplayer/dist/online')));
+app.use(
+  '/(/)?lib',
+  express.static(path.resolve(__dirname, '../node_modules/insync-stageplayer/dist/online')),
+);
 app.use(`(/)?${options.assetRoot}`, express.static(options.assetRoot));
 
 const regexMatch = pattern => pathname => pathname.match(pattern);
-app.use(proxy(regexMatch('/(/)?lib'), { target: options.libServer, pathRewrite: { '^/(/)?lib' : '' } }));
+app.use(
+  proxy(regexMatch('/(/)?lib'), {
+    target: options.libServer,
+    pathRewrite: {
+      '^/(/)?lib': '',
+    },
+  }),
+);
 app.use(proxy(regexMatch(`/(/)?${constants.DATA_ENDPOINT}`), { target: options.dataServer }));
-app.use(proxy(regexMatch(`/(/)?${constants.SBF_DATA_ENDPOINT}`), { target: options.sbfDataServer }));
-
+app.use(
+  proxy(regexMatch(`/(/)?${constants.SBF_DATA_ENDPOINT}`), { target: options.sbfDataServer }),
+);
 
 if (process.env.NODE_ENV !== 'production') {
   LOGGER.debug('Serving through webpack dev server.');
@@ -36,7 +46,6 @@ if (process.env.NODE_ENV !== 'production') {
   LOGGER.debug(`Serving static files from ${publicDir}.`);
   app.use(express.static(publicDir));
 }
-
 
 app.listen(options.port, options.host, () => {
   LOGGER.info(`listening on ${options.host}:${options.port}.`);

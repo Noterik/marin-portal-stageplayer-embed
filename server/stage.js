@@ -50,7 +50,7 @@ const getStage = (p) => {
       R.tap((mergedStage) => { LOGGER.debug('merged stage = ', mergedStage); }),
     )(stage);
   });
-}
+};
 
 module.exports = {
   getStage,
