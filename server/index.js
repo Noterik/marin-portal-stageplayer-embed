@@ -56,9 +56,12 @@ LOGGER.info('Setting interval to ping measurement server');
 
 setInterval(() => {
   LOGGER.info(`Sending to ${options.dataServer}`);
-  // eslint-disable-next-line consistent-return
-  request(options.dataServer, (err) => {
+  request({
+    url: options.dataServer,
+    timeout: 1000,
+  }, (err) => {
     if (err) { return LOGGER.error(err); }
     LOGGER.info(`Got response from ${options.dataServer}`);
+    return false;
   });
 }, 10000);

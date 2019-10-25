@@ -1,6 +1,6 @@
 {
   "name": "marin-portal-stageplayer-embed",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Embed for StagePlayer",
   "main": "index.js",
   "repository": "git@github.com:Noterik/marin-portal-stageplayer-embed.git",
