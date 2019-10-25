@@ -1,5 +1,6 @@
 const express = require('express');
 const proxy = require('http-proxy-middleware');
+const request = require('request');
 
 const path = require('path');
 const bodyParser = require('body-parser');
@@ -50,3 +51,14 @@ if (process.env.NODE_ENV !== 'production') {
 app.listen(options.port, options.host, () => {
   LOGGER.info(`listening on ${options.host}:${options.port}.`);
 });
+
+LOGGER.info('Setting interval to ping measurement server');
+
+setInterval(() => {
+  LOGGER.info(`Sending to ${options.dataServer}`);
+  // eslint-disable-next-line consistent-return
+  request(options.dataServer, (err) => {
+    if (err) { return LOGGER.error(err); }
+    LOGGER.info(`Got response from ${options.dataServer}`);
+  });
+}, 10000);

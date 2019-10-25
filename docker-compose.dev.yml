@@ -7,7 +7,10 @@ services:
       - ${HOST_ASSET_ROOT}:${ASSET_ROOT}
   measurementserver:
     restart: always
-    image: index.docker.io/noterik/insync-measurement-reader:latest
+    #image: index.docker.io/noterik/insync-measurement-reader:latest
+    build: 
+      context: ../insync-measurement-reader
+      dockerfile: Dockerfile
     volumes:
       - ${HOST_ASSET_ROOT}:/data/${ASSET_ROOT}
     command: ['-d', '/data', '--logLevel', 'INFO']
