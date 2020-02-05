@@ -3525,10 +3525,10 @@ inquirer@^7.0.0:
     strip-ansi "^5.1.0"
     through "^2.3.6"
 
-insync-stage-handler@^2.1.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/insync-stage-handler/-/insync-stage-handler-2.1.0.tgz#9ab38c391fe805b4072e39ea7d908e0eb1f50631"
-  integrity sha512-suQHv5/lu8MUfDEfTvveAAZA6WJkgy9jT1NxOqlvpxgPL4pQFgqhkgTs04OFZgjaQJ4npi+Ybw8Wn007VCsq0w==
+insync-stage-handler@2.1.2:
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/insync-stage-handler/-/insync-stage-handler-2.1.2.tgz#655e981f8e13c495b5bb9b2dc6cd1b04c55d3639"
+  integrity sha512-OWiDuMkfGn7L9J0maj0lhnjjZ4UqplG4z34QC8C6EtIEklXIIP4Dz5/+8+MLy1DbcvOVwr/5WdAIP0OE2euEpg==
   dependencies:
     ajv "^6.9.1"
     object-hash "^1.3.1"

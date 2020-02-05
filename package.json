@@ -1,6 +1,6 @@
 {
   "name": "marin-portal-stageplayer-embed",
-  "version": "1.0.1",
+  "version": "2.0.0-beta",
   "description": "Embed for StagePlayer",
   "main": "index.js",
   "repository": "git@github.com:Noterik/marin-portal-stageplayer-embed.git",
@@ -44,7 +44,7 @@
     "date-fns": "^2.0.0-alpha.37",
     "express": "^4.17.1",
     "http-proxy-middleware": "^0.19.1",
-    "insync-stage-handler": "^2.1.0",
+    "insync-stage-handler": "2.1.2",
     "minimist": "^1.2.0",
     "object-hash": "^1.3.1",
     "p-queue": "^6.2.1",

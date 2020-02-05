@@ -12,7 +12,7 @@ services:
       - ${HOST_ASSET_ROOT}:/data/${ASSET_ROOT}
     command: ['-d', '/data', '--logLevel', 'INFO']
   stageplayer:
-    image: index.docker.io/noterik/marin-stageplayer:2.1.1
+    image: index.docker.io/noterik/marin-stageplayer:2.4.0
   embed:
     restart: always
     build:

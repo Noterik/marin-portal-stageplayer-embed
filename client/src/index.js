@@ -1,11 +1,12 @@
 import url from "url";
-import path from "path"; 
+import path from "path";
 import querystring from "querystring";
 import * as R from "ramda";
-
+import pkg from "../../package.json";
 import { getMeta, getData } from "./data-api";
-
 import constants from "../../constants";
+
+console.log(`Marin Portal StagePlayer Embed ${pkg.version}`);
 
 const { STAGE_ENDPOINT } = constants;
 
@@ -46,7 +47,10 @@ const defaultArgs = {
     return Promise.reject();
   },
   resolveFileURI: ({ path: filePath }) => {
-    return `/export${path.resolve(path.dirname(stage), filePath)}`;
+    const ext = path.extname(filePath).toLowerCase();
+    return ext !== ".sbf" && ext !== ".h5m"
+      ? `export${path.resolve(path.dirname(stage), filePath)}`
+      : filePath;
   },
   fetchData: getData,
   fetchDataMetadata
