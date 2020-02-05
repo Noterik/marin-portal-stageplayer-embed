@@ -20,11 +20,11 @@ services:
       - embed
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf
-      - ./example/portal:/usr/share/nginx/html
+      - ./example:/usr/share/nginx/html
     ports:
       - "${HOST_PORT}:80"
   stageplayer:
-    image: index.docker.io/noterik/marin-stageplayer:2.1.1
+    image: index.docker.io/noterik/marin-stageplayer:2.4.0-SNAPSHOT
   embed:
     restart: always
     build:

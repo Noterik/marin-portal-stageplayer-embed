@@ -1,15 +1,15 @@
 module.exports = {
   presets: [
     [
-      '@babel/env',
+      "@babel/env",
       {
         targets: {
-          browsers: ['last 2 versions'],
+          browsers: ["last 2 versions"]
         },
-        useBuiltIns: 'usage',
-        corejs: '2',
-      },
-    ],
+        useBuiltIns: "usage",
+        corejs: "2"
+      }
+    ]
   ],
-  plugins: ['@babel/plugin-proposal-object-rest-spread'],
+  plugins: ["@babel/plugin-proposal-object-rest-spread", "ramda"]
 };
