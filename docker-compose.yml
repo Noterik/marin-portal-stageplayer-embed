@@ -20,8 +20,6 @@ services:
       dockerfile: Dockerfile
     env_file:
       - .env
-    ports:
-      - "${HOST_PORT}:8080"
     volumes:
       - ${HOST_ASSET_ROOT}:${ASSET_ROOT}
       - /app/node_modules
@@ -29,7 +27,7 @@ services:
       - ./constants.js:/app/constants.js
     command: [
       '--host=0.0.0.0',
-      '--port=8080',
+      '--port=80',
       '--assetRoot=${ASSET_ROOT}',
       '--dataServer=http://measurementserver:8080',
       '--sbfDataServer=http://dataserver:8080',
