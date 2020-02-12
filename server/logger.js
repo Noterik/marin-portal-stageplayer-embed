@@ -1,7 +1,7 @@
-const winston = require('winston');
-const options = require('./options');
+const winston = require("winston");
+const options = require("./options");
 
-const createLogger = ({ file = undefined, level = 'info' }) => {
+const createLogger = ({ file = undefined, level = "info" }) => {
   const transports = [new winston.transports.Console({ level })];
   if (file) {
     transports.push(new winston.transports.File({ filename: file, level }));
@@ -10,10 +10,10 @@ const createLogger = ({ file = undefined, level = 'info' }) => {
     level,
     format: winston.format.combine(
       winston.format.timestamp(),
-      winston.format.json(),
+      winston.format.json()
     ),
-    defaultMeta: { service: 'stageplayer-portal-embed' },
-    transports,
+    defaultMeta: { service: "stageplayer-portal-embed" },
+    transports
   });
 };
 
@@ -21,5 +21,5 @@ const LOGGER = createLogger({ file: options.log, level: options.logLevel });
 
 module.exports = {
   LOGGER,
-  createLogger,
+  createLogger
 };
