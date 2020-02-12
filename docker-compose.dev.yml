@@ -7,10 +7,7 @@ services:
       - ${HOST_ASSET_ROOT}:${ASSET_ROOT}
   measurementserver:
     restart: always
-    #image: index.docker.io/noterik/insync-measurement-reader:latest
-    build: 
-      context: ../insync-measurement-reader
-      dockerfile: Dockerfile
+    image: index.docker.io/noterik/insync-measurement-reader:latest
     volumes:
       - ${HOST_ASSET_ROOT}:/data/${ASSET_ROOT}
     command: ['-d', '/data', '--logLevel', 'INFO']
@@ -24,7 +21,7 @@ services:
     ports:
       - "${HOST_PORT}:80"
   stageplayer:
-    image: index.docker.io/noterik/marin-stageplayer:2.1.1
+    image: index.docker.io/noterik/marin-stageplayer:2.4.0-SNAPSHOT
   embed:
     restart: always
     build:

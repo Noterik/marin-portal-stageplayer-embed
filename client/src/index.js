@@ -16,7 +16,7 @@ const dataURL = url.resolve(window.location.href, DATA_ENDPOINT);
 const sbfDataURL = url.resolve(window.location.href, SBF_DATA_ENDPOINT);
 
 const outgoingActions = {
-  getStage: async () => fetch(`${stageURL}?${querystring.stringify({ file: stage })}`).then(r => r.json()),
+  fetchStage: async () => fetch(`${stageURL}?${querystring.stringify({ file: stage })}`).then(r => r.json()),
   save: () => {
     return Promise.reject();
   },
