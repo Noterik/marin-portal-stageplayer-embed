@@ -15,19 +15,16 @@ services:
     image: index.docker.io/noterik/marin-stageplayer:2.4.0
   embed:
     restart: always
-    build:
-      context: ./
-      dockerfile: Dockerfile
+    image: index.docker.io/noterik/marin-portal-stageplayer-embed:2.0.0
     env_file:
       - .env
     volumes:
       - ${HOST_ASSET_ROOT}:${ASSET_ROOT}
-      - /app/node_modules
-      - ./server:/app/server
-      - ./constants.js:/app/constants.js
+    ports: 
+      - ${HOST_PORT}:8080
     command: [
       '--host=0.0.0.0',
-      '--port=80',
+      '--port=8080',
       '--assetRoot=${ASSET_ROOT}',
       '--dataServer=http://measurementserver:8080',
       '--sbfDataServer=http://dataserver:8080',
