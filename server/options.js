@@ -1,32 +1,32 @@
-const minimist = require('minimist');
-const path = require('path');
+const minimist = require("minimist");
+const path = require("path");
 
 const args = minimist(process.argv.slice(2), {
   alias: {
-    p: 'port',
-    l: 'log',
-    logLevel: 'log-level',
-    assetRoot: 'asset-root',
-    root: 'root',
-    dataServer: 'data-server',
-    sbfDataServer: 'sbf-data-server',
-    stageplayerServer: 'stageplayer-server',
-    libServer: 'lib-server',
-  },
+    p: "port",
+    l: "log",
+    logLevel: "log-level",
+    assetRoot: "asset-root",
+    root: "root",
+    dataServer: "data-server",
+    sbfDataServer: "sbf-data-server",
+    stageplayerServer: "stageplayer-server",
+    libServer: "lib-server"
+  }
 });
 
 const {
   port = 8080,
-  host = 'localhost',
+  host = "localhost",
   log = undefined,
-  logLevel = 'info',
-  assetRoot = './',
-  dataServer = 'http://localhost',
-  sbfDataServer = 'http://localhost',
-  libServer = 'http://localhost',
+  logLevel = "info",
+  assetRoot = "./",
+  dataServer = "http://localhost",
+  sbfDataServer = "http://localhost",
+  libServer = "http://localhost"
 } = args;
 
-const root = path.resolve(__dirname, '..');
+const root = path.resolve(__dirname, "..");
 
 module.exports = Object.freeze({
   port,
@@ -36,5 +36,5 @@ module.exports = Object.freeze({
   assetRoot: path.resolve(root, assetRoot),
   dataServer,
   sbfDataServer,
-  libServer,
+  libServer
 });

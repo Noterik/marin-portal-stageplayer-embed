@@ -1,8 +1,11 @@
 {
-  "extends": "airbnb-base",
+  "extends": ["airbnb-base", "prettier"],
   "parser": "babel-eslint",
   "env": {
     "browser": true
+  },
+  "globals": {
+    "marin": "readonly"
   },
   "rules": {
     "import/prefer-default-export": "off",
@@ -27,6 +30,11 @@
             ],
             "allowSamePrecedence": true
         }
-    ]
-  }
+    ],
+    "prettier/prettier": "error"
+  },
+  "plugins": [
+    "import",
+    "prettier"
+  ]
 }
