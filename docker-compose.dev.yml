@@ -22,7 +22,9 @@ services:
       - "${HOST_PORT}:80"
   stageplayer:
       build:
-      context: ../marin-stageplayer
+        context: ../marin-stageplayer
+        args:
+          NPM_TOKEN: ${NPM_TOKEN}
   embed:
     restart: always
     build:
