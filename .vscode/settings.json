@@ -1,3 +1,19 @@
 {
-  "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  "files.trimTrailingWhitespace": true,
+  "files.trimFinalNewlines": true,
+  "eslint.format.enable": true,
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+  "prettier.endOfLine": "lf",
+  "prettier.disableLanguages": [
+    "javascript",
+    "javascriptreact"
+  ],
+  "files.eol": "\n",
+  "[javascript]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  },
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  }
 }
