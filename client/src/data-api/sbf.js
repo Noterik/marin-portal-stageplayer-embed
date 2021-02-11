@@ -1,4 +1,4 @@
-import { pipe, map, flatten, prop, pick, fromPairs, values } from "ramda";
+import * as R from "ramda";
 
 const { default: PQueue } = require("p-queue");
 
@@ -9,48 +9,58 @@ const handleDataServerResponse = r => {
   return r.json();
 };
 
-export const getMeta = async (paths, endPoint) => {
+export const fetchDataMetadata = R.curry(async (endpoint, file) => {
   const args = {
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
-      "X-Files": paths.join(",")
+      "X-Files": file
     },
     method: "POST",
     credentials: "include",
     body: JSON.stringify({
       getMeta: {
-        files: paths
+        files: [file]
       }
     })
   };
 
-  const r = await fetch(endPoint, args);
-  return handleDataServerResponse(r);
-};
+  const r = await fetch(endpoint, args);
+  const json = await handleDataServerResponse(r);
 
-export const getData = (args, endPoint) => {
-  // TODO: Remove hack by Pieter
-  const realArgs = args.map(
-    ({ measurements = undefined, start, end, ...arg }) => ({
-      ...arg,
-      start,
-      end,
-      streams: measurements.map(s => ({
-        ...s,
-        stream: s.name
+  const result = R.pipe(
+    R.path(["metadata", 0]),
+    ({ streams: measurements, ...metadata }) => ({ measurements, ...metadata }),
+    R.over(
+      R.lensProp("measurements"),
+      R.map(measurement => ({
+        file,
+        id: measurement.name,
+        ...measurement
       }))
-    })
-  );
+    )
+  )(json);
+  return result;
+});
 
-  const files = args.map(arg => arg.sbf).join(",");
-  const body = JSON.stringify(realArgs.map(arg => ({ getData: arg })));
+export const fetchData = R.curry(async (endpoint, args) => {
+  const sbfArgs = {
+    getData: {
+      file: args.file,
+      start: args.offset,
+      end: args.offset + args.limit,
+      streams: args.measurements,
+      resolution: args.rows
+    }
+  };
+
+  const body = JSON.stringify([sbfArgs]);
 
   const fetchArgs = {
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
-      "X-Files": files
+      "X-Files": args.file
     },
     credentials: "include",
     method: "POST",
@@ -58,16 +68,21 @@ export const getData = (args, endPoint) => {
   };
 
   return queue.add(() =>
-    fetch(endPoint, fetchArgs)
+    fetch(endpoint, fetchArgs)
       .then(handleDataServerResponse)
       .then(
-        pipe(
-          map(prop("streams")),
-          flatten,
-          map(pipe(pick(["name", "data"]), values)),
-          fromPairs,
-          map(map(([x, y]) => ({ x, y })))
+        R.pipe(
+          R.map(R.prop("streams")),
+          R.flatten,
+          R.map(R.pipe(R.pick(["name", "data"]), R.values)),
+          R.fromPairs,
+          R.map(R.map(([x, y]) => ({ x, y })))
         )
       )
   );
-};
+});
+
+export default endpoint => ({
+  fetchDataMetadata: fetchDataMetadata(endpoint),
+  fetchData: fetchData(endpoint)
+});

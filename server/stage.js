@@ -1,12 +1,16 @@
 const path = require("path");
 const fs = require("fs").promises;
 const R = require("ramda");
-const createStageHandler = require("insync-stage-handler");
+const {
+  createStageHandler,
+  createStageSettingsHandler
+} = require("insync-stage-handler");
 const options = require("./options");
 const { getSettings } = require("./settings");
 const { LOGGER } = require("./logger");
 
 const handler = createStageHandler();
+const settingsHandler = createStageSettingsHandler();
 
 const { assetRoot } = options;
 
@@ -36,8 +40,11 @@ const getStage = p => {
   const resolvedP = joinWithAssetRoot(p);
   return Promise.all([readStage(resolvedP), getSettings(resolvedP)]).then(
     ([stage, settings]) => {
+      // console.log("handled settings = ", settingsHandler(stage, settings));
+      const { stage: handledStage } = handler(stage);
+      const handledSettings = settingsHandler(handledStage, settings);
       return R.pipe(
-        R.mergeLeft(settings),
+        R.mergeLeft(handledSettings),
         R.assocPath(["menu", "visible"], false),
         R.assocPath(["annotations", "allowed"], false),
         R.assoc("data", R.prop("data", settings)),
@@ -55,10 +62,14 @@ const getStage = p => {
           R.lensPath(["files", "entities", "files", "byId"]),
           R.map(fixPath(resolvedP))
         ),
+        R.over(
+          R.lensPath(["timeline", "entities", "tracks", "byId"]),
+          R.filter(t => t.type !== "comment")
+        ),
         R.tap(mergedStage => {
           LOGGER.debug("merged stage = ", mergedStage);
         })
-      )(stage);
+      )(handledStage);
     }
   );
 };

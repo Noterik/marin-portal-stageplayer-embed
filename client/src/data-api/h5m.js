@@ -1,14 +1,4 @@
-import {
-  pipe,
-  curry,
-  when,
-  prop,
-  assoc,
-  always,
-  path,
-  map,
-  mergeAll
-} from "ramda";
+import { pipe, curry, when, prop, assoc, always, path, map } from "ramda";
 
 const handleServerResponse = response => {
   return response.json().then(responseJson => ({
@@ -37,14 +27,20 @@ const createMetaRequest = p => ({
   })
 });
 
-const extractMeasurements = tree => {
+const extractMeasurements = (file, tree, index = "") => {
   return tree.children.reduce((acc, child) => {
+    const newIndex = `${index}/${child.name}`;
     if (child.children) {
-      return [...acc, ...extractMeasurements(child)];
+      return [...acc, ...extractMeasurements(file, child, newIndex)];
     }
     return [
       ...acc,
-      child.type === "measurement" && { ...child, id: child.name }
+      child.type === "measurement" && {
+        ...child,
+        id: newIndex,
+        file,
+        index: newIndex
+      }
     ];
   }, []);
 };
@@ -59,29 +55,16 @@ const handleMetaResponse = curry((forFile, response) =>
         pipe(
           always({}),
           assoc("path", forFile),
-          assoc("streams", extractMeasurements(handled.data.metadata))
+          assoc(
+            "measurements",
+            extractMeasurements(forFile, handled.data.metadata)
+          )
         )(handled)
     )
   )
 );
 
-export const getMeta = async (paths, endPoint) => {
-  return Promise.all(
-    paths.map(p =>
-      Promise.resolve(createMetaRequest(p))
-        .then(request => fetch(endPoint, request))
-        .then(handleMetaResponse(p))
-    )
-  ).then(metadata => ({ metadata }));
-};
-
-const createDataRequest = args => {
-  const {
-    file,
-    measurements,
-    start: offset = undefined,
-    end = undefined
-  } = args;
+const createDataRequest = ({ file, measurements, offset, limit, rows }) => {
   return {
     headers: {
       Accept: "application/json",
@@ -94,10 +77,10 @@ const createDataRequest = args => {
       action: "data",
       params: {
         file,
-        measurements: measurements.map(prop("name")),
+        measurements,
         offset,
-        rows: measurements[0].resolution,
-        limit: end - offset,
+        rows,
+        limit,
         unit: "MILLI"
       }
     })
@@ -115,12 +98,14 @@ const handleDataResponse = response =>
     )
   );
 
-export const getData = (requests, endPoint) => {
-  return Promise.all(
-    requests.map(requestParams =>
-      Promise.resolve(createDataRequest(requestParams))
-        .then(params => fetch(endPoint, params))
-        .then(handleDataResponse)
-    )
-  ).then(mergeAll);
-};
+export default endpoint => ({
+  fetchData: async args => {
+    const response = await fetch(endpoint, createDataRequest(args));
+    return handleDataResponse(response);
+  },
+  fetchDataMetadata: async file => {
+    const response = await fetch(endpoint, createMetaRequest(file));
+    const handled = await handleMetaResponse(file, response);
+    return handled;
+  }
+});
