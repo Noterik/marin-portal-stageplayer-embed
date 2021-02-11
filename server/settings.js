@@ -30,8 +30,6 @@ const findSettingsFor = p => {
     )
     .reverse();
 
-  console.log("paths = ", paths);
-
   LOGGER.debug(`Scanning paths [${paths}] in that order until one is found.`);
 
   return paths.reduce((result, part) => {

@@ -41,10 +41,10 @@ const getStage = p => {
   return Promise.all([readStage(resolvedP), getSettings(resolvedP)]).then(
     ([stage, settings]) => {
       // console.log("handled settings = ", settingsHandler(stage, settings));
-      const handledSettings = settingsHandler(stage, settings);
-      console.log("handledSettings = ", handledSettings);
+      const { stage: handledStage } = handler(stage);
+      const handledSettings = settingsHandler(handledStage, settings);
       return R.pipe(
-        R.mergeLeft(settings),
+        R.mergeLeft(handledSettings),
         R.assocPath(["menu", "visible"], false),
         R.assocPath(["annotations", "allowed"], false),
         R.assoc("data", R.prop("data", settings)),
@@ -62,10 +62,14 @@ const getStage = p => {
           R.lensPath(["files", "entities", "files", "byId"]),
           R.map(fixPath(resolvedP))
         ),
+        R.over(
+          R.lensPath(["timeline", "entities", "tracks", "byId"]),
+          R.filter(t => t.type !== "comment")
+        ),
         R.tap(mergedStage => {
           LOGGER.debug("merged stage = ", mergedStage);
         })
-      )(stage);
+      )(handledStage);
     }
   );
 };

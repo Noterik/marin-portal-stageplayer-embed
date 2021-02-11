@@ -1,11 +1,12 @@
 import url from "url";
+import * as R from "ramda";
 import path from "path";
 import querystring from "querystring";
 import pkg from "../../package.json";
 import { fetchData, fetchDataMetadata } from "./data-api";
 import constants from "../../constants";
 
-console.log(`Marin Portal StagePlayer Embed 123 ${pkg.version}`);
+console.log(`Marin Portal StagePlayer Embed ${pkg.version}`);
 
 const { STAGE_ENDPOINT } = constants;
 
@@ -21,10 +22,16 @@ const stageURL = url.resolve(window.location.href, STAGE_ENDPOINT);
 
 const defaultArgs = {
   target: "#root",
-  fetchStage: async () =>
-    fetch(`${stageURL}?${querystring.stringify({ file: stage })}`).then(r =>
-      r.json()
-    ),
+  fetchStage: async () => {
+    const response = await fetch(
+      `${stageURL}?${querystring.stringify({ file: stage })}`
+    );
+    const json = await response.json();
+    return R.over(
+      R.lensPath(["timeline", "entities", "timeline", "byId"]),
+      R.map(R.assocPath(["actions", "copyLink"], false))
+    )(json);
+  },
   save: () => {
     return Promise.reject();
   },

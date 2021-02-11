@@ -12,22 +12,6 @@ services:
       - ${HOST_ASSET_ROOT}:/data/${ASSET_ROOT}
     command: ['-d', '/data', '--logLevel', 'INFO']
   stageplayer:
-    image: index.docker.io/noterik/marin-stageplayer:3-dev
-  embed:
-    restart: always
-    image: index.docker.io/noterik/marin-portal-stageplayer-embed:3.0.0-beta.1
-    env_file:
-      - .env
-    volumes:
-      - ${HOST_ASSET_ROOT}:${ASSET_ROOT}
+    image: index.docker.io/noterik/marin-stageplayer:3.0
     ports:
-      - ${HOST_PORT}:8080
-    command: [
-      '--host=0.0.0.0',
-      '--port=8080',
-      '--assetRoot=${ASSET_ROOT}',
-      '--dataServer=http://measurementserver:8080',
-      '--sbfDataServer=http://dataserver:8080',
-      '--libServer=http://stageplayer',
-      '--logLevel=debug'
-    ]
+      - 80:80

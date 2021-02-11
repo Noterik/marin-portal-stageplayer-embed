@@ -4556,10 +4556,10 @@ ini@^1.3.4, ini@^1.3.5, ini@~1.3.0:
   resolved "https://registry.yarnpkg.com/ini/-/ini-1.3.8.tgz#a29da425b48806f34767a4efce397269af28432c"
   integrity sha512-JV/yugV2uzW5iMRSiZAyDtQd+nxtUnjeLt0acNdw98kKLrvuRVyB80tsREOE7yvGVgalhZ6RNXCmEHkUKBKxew==
 
-insync-stage-handler@^3.0.0-rc.12:
-  version "3.0.0-rc.12"
-  resolved "https://registry.yarnpkg.com/insync-stage-handler/-/insync-stage-handler-3.0.0-rc.12.tgz#ba0dba5ab7ead2c5c98cade858e2bead60914edb"
-  integrity sha512-xcOyFEeIUgkGUPfZVrunce/QhjqwHPwK//3ZwTtZDMD35fk5rVqvtnH5eX+p9fD6DqvY05KV7zXiPzt9aPSRDw==
+insync-stage-handler@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/insync-stage-handler/-/insync-stage-handler-3.0.0.tgz#27df9a08310bc84fa8642276b5642061de384c90"
+  integrity sha512-/ENo5UBMrWO0QodjrhZBg9RH7knaLQVDJSNshHHNdZGbjKnRcf+4jBoBdvCqTkX7TfE8uUoSo+3YOi9JkL9UvA==
   dependencies:
     ajv "^6.9.1"
     ajv-keywords "^3.5.2"

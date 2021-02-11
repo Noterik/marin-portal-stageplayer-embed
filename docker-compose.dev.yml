@@ -21,10 +21,7 @@ services:
     ports:
       - "${HOST_PORT}:80"
   stageplayer:
-      build:
-        context: ../marin-stageplayer
-        args:
-          NPM_TOKEN: ${NPM_TOKEN}
+    image: index.docker.io/noterik/marin-stageplayer:3.0.0
   embed:
     restart: always
     build:
