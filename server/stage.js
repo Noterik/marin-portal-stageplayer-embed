@@ -40,7 +40,6 @@ const getStage = p => {
   const resolvedP = joinWithAssetRoot(p);
   return Promise.all([readStage(resolvedP), getSettings(resolvedP)]).then(
     ([stage, settings]) => {
-      // console.log("handled settings = ", settingsHandler(stage, settings));
       const { stage: handledStage } = handler(stage);
       const handledSettings = settingsHandler(handledStage, settings);
       return R.pipe(

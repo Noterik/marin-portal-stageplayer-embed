@@ -33,9 +33,23 @@ app.use(
     target: options.libServer,
     pathRewrite: {
       "^/(/)?lib": ""
+    },
+    onProxyRes(proxyRes, req) {
+      if (
+        req.url &&
+        (req.url.endsWith(".html") || req.url.endsWith(".bundle.js"))
+      ) {
+        /* eslint-disable no-param-reassign */
+        proxyRes.headers["Cache-Control"] =
+          "no-cache, no-store, must-revalidate";
+        proxyRes.headers.Pragma = "no-cache";
+        proxyRes.headers.Expires = 0;
+        /* eslint-enable no-param-reassign */
+      }
     }
   })
 );
+
 app.use(
   proxy(regexMatch(`/(/)?${constants.DATA_ENDPOINT}`), {
     target: options.dataServer
@@ -47,13 +61,20 @@ app.use(
   })
 );
 
+function setCustomCacheControl(res, p) {
+  if (p.endsWith(".html")) {
+    // Custom Cache-Control for HTML files
+    res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+  }
+}
+
 if (process.env.NODE_ENV !== "production") {
   LOGGER.debug("Serving through webpack dev server.");
   app.use("/", proxy(`http://localhost:${constants.CLIENT_PORT}`));
 } else {
   const publicDir = path.resolve(__dirname, "../client/public/");
   LOGGER.debug(`Serving static files from ${publicDir}.`);
-  app.use(express.static(publicDir));
+  app.use(express.static(publicDir, { setHeaders: setCustomCacheControl }));
 }
 
 app.listen(options.port, options.host, () => {
