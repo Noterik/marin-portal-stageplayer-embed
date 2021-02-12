@@ -21,7 +21,9 @@ services:
     ports:
       - "${HOST_PORT}:80"
   stageplayer:
-    image: index.docker.io/noterik/marin-stageplayer:3.0.0
+    image: index.docker.io/noterik/marin-stageplayer:3.0.1-beta.1
+    ports:
+      - "3000:3000"
   embed:
     restart: always
     build:

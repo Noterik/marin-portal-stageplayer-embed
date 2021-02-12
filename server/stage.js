@@ -40,14 +40,13 @@ const getStage = p => {
   const resolvedP = joinWithAssetRoot(p);
   return Promise.all([readStage(resolvedP), getSettings(resolvedP)]).then(
     ([stage, settings]) => {
-      // console.log("handled settings = ", settingsHandler(stage, settings));
       const { stage: handledStage } = handler(stage);
       const handledSettings = settingsHandler(handledStage, settings);
       return R.pipe(
         R.mergeLeft(handledSettings),
         R.assocPath(["menu", "visible"], false),
         R.assocPath(["annotations", "allowed"], false),
-        R.assoc("data", R.prop("data", settings)),
+        R.assoc("data", R.prop("data", handledSettings)),
         R.assocPath(
           ["data", "measurementScale"],
           R.path(["data", "measurementScale"], stage)

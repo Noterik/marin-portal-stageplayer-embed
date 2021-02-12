@@ -12,6 +12,6 @@ services:
       - ${HOST_ASSET_ROOT}:/data/${ASSET_ROOT}
     command: ['-d', '/data', '--logLevel', 'INFO']
   stageplayer:
-    image: index.docker.io/noterik/marin-stageplayer:3.0
+    image: index.docker.io/noterik/marin-stageplayer:3.0.1-beta.1
     ports:
       - 80:80
