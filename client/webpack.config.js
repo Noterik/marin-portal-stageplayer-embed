@@ -29,7 +29,7 @@ module.exports = env => {
       : {},
     devtool: "source-maps",
     output: {
-      filename: "stageplayer-embed.bundle.[chunkhash].js",
+      filename: "stageplayer-embed.bundle.[hash].js",
       path: path.resolve(__dirname, "public")
     },
     module: {
