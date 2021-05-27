@@ -1,14 +1,14 @@
 import url from "url";
 import * as R from "ramda";
 import path from "path";
+import { OnlineMeasurementDataClient } from "@insync-stageplayer/measurements/lib/client/OnlineMeasurementDataClient";
 import querystring from "querystring";
 import pkg from "../../package.json";
-import { fetchData, fetchDataMetadata } from "./data-api";
 import constants from "../../constants";
 
 console.log(`Marin Portal StagePlayer Embed ${pkg.version}`);
 
-const { STAGE_ENDPOINT } = constants;
+const { STAGE_ENDPOINT, DATA_ENDPOINT, SBF_DATA_ENDPOINT } = constants;
 
 const paramsStr =
   window.location.search.indexOf("?") === 0
@@ -20,6 +20,21 @@ const { stage = undefined } = params;
 
 const stageURL = url.resolve(window.location.href, STAGE_ENDPOINT);
 
+let hdfEndpoint;
+if (window.location.protocol === "https:") {
+  hdfEndpoint = "wss:";
+} else {
+  hdfEndpoint = "ws:";
+}
+hdfEndpoint += `//${window.location.host}`;
+hdfEndpoint += `${window.location.pathname}${DATA_ENDPOINT}/ws`;
+console.log("hdfEndpoint =", hdfEndpoint);
+
+const measurementDataClient = new OnlineMeasurementDataClient({
+  hdfEndpoint,
+  sbfEndpoint: SBF_DATA_ENDPOINT
+});
+
 const defaultArgs = {
   target: "#root",
   fetchStage: async () => {
@@ -27,10 +42,17 @@ const defaultArgs = {
       `${stageURL}?${querystring.stringify({ file: stage })}`
     );
     const json = await response.json();
-    return R.over(
-      R.lensPath(["timeline", "entities", "timeline", "byId"]),
-      R.map(R.assocPath(["actions", "copyLink"], false))
+    console.log("JSON = ", json);
+    const completeStage = R.pipe(
+      R.over(
+        R.lensPath(["timeline", "entities", "timeline", "byId"]),
+        R.map(R.assocPath(["actions", "copyLink"], false))
+      ),
+      R.assocPath(["menu", "allowedActions"], [])
     )(json);
+
+    console.log("completeStage = ", completeStage);
+    return completeStage;
   },
   save: () => {
     return Promise.reject();
@@ -53,8 +75,7 @@ const defaultArgs = {
       ? `export${path.resolve(path.dirname(stage), filePath)}`
       : filePath;
   },
-  fetchData,
-  fetchDataMetadata
+  measurementDataClient
 };
 
 const initStagePlayer = () => {

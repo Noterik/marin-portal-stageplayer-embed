@@ -1,5 +1,6 @@
 const express = require("express");
-const proxy = require("http-proxy-middleware");
+const { createProxyMiddleware } = require("http-proxy-middleware");
+
 const request = require("request");
 
 const path = require("path");
@@ -29,7 +30,7 @@ app.use(`(/)?${options.assetRoot}`, express.static(options.assetRoot));
 
 const regexMatch = pattern => pathname => pathname.match(pattern);
 app.use(
-  proxy(regexMatch("/(/)?lib"), {
+  createProxyMiddleware(regexMatch("/(/)?lib"), {
     target: options.libServer,
     pathRewrite: {
       "^/(/)?lib": ""
@@ -50,13 +51,21 @@ app.use(
   })
 );
 
+const dataRegEx = new RegExp(`/(/)?${constants.DATA_ENDPOINT}`);
 app.use(
-  proxy(regexMatch(`/(/)?${constants.DATA_ENDPOINT}`), {
-    target: options.dataServer
+  createProxyMiddleware(regexMatch(dataRegEx), {
+    target: options.dataServer,
+    pathRewrite(p) {
+      const rewrittenPath = p.replace(dataRegEx, "");
+      return rewrittenPath;
+    },
+    ws: true,
+    changeOrigin: true
   })
 );
+
 app.use(
-  proxy(regexMatch(`/(/)?${constants.SBF_DATA_ENDPOINT}`), {
+  createProxyMiddleware(regexMatch(`/(/)?${constants.SBF_DATA_ENDPOINT}`), {
     target: options.sbfDataServer
   })
 );
@@ -70,7 +79,10 @@ function setCustomCacheControl(res, p) {
 
 if (process.env.NODE_ENV !== "production") {
   LOGGER.debug("Serving through webpack dev server.");
-  app.use("/", proxy(`http://localhost:${constants.CLIENT_PORT}`));
+  app.use(
+    "/",
+    createProxyMiddleware(`http://localhost:${constants.CLIENT_PORT}`)
+  );
 } else {
   const publicDir = path.resolve(__dirname, "../client/public/");
   LOGGER.debug(`Serving static files from ${publicDir}.`);

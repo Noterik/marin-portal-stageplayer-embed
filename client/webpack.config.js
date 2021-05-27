@@ -42,6 +42,14 @@ module.exports = env => {
               loader: "babel-loader"
             }
           ]
+        },
+        {
+          test: /\.css$/,
+          use: [
+            {
+              loader: "css-loader"
+            }
+          ]
         }
       ]
     },

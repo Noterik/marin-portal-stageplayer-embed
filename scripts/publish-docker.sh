@@ -22,6 +22,6 @@ git tag $GIT_TAG
 git push origin --tags
 
 echo "Building docker image"
-docker build -f Dockerfile -t noterik/marin-portal-stageplayer-embed:$GIT_TAG .
+docker build -f Dockerfile --build-arg NPM_TOKEN=${NPM_TOKEN} -t noterik/marin-portal-stageplayer-embed:$GIT_TAG .
 echo "Publishing to docker hub"
 docker push noterik/marin-portal-stageplayer-embed:$GIT_TAG
